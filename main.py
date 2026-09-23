@@ -12,7 +12,7 @@ from src.word2vec_clustering import create_word2vec_vectors
 from src.glove_clustering import create_glove_vectors
 from src.clustering import apply_kmeans
 from src.evaluation import evaluate_clustering, print_evaluation
-
+from src.visualization import plot_elbow, plot_clusters
 
 DATA_DIRECTORY = Path("data/sample_documents")
 
@@ -31,7 +31,6 @@ def load_documents():
 
     return documents, document_names
 
-
 def run_experiment(method_name, vectors, document_names, n_clusters):
     labels, _ = apply_kmeans(
         vectors,
@@ -47,6 +46,22 @@ def run_experiment(method_name, vectors, document_names, n_clusters):
     for document_name, label in zip(document_names, labels):
         print(f"  {document_name} -> Cluster {label}")
 
+    elbow_path = plot_elbow(
+        vectors,
+        method_name
+    )
+
+    cluster_path = plot_clusters(
+        vectors,
+        labels,
+        document_names,
+        method_name
+    )
+
+    print(f"Elbow plot saved to: {elbow_path}")
+    print(f"Cluster plot saved to: {cluster_path}")
+
+    return metrics
 
 def main():
     download_nltk_resources()
