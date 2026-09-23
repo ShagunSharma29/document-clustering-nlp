@@ -171,7 +171,7 @@ document-clustering-nlp/
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/document-clustering-nlp.git
+git clone https://github.com/ShagunSharma29/document-clustering-nlp.git
 cd document-clustering-nlp
 ```
 
